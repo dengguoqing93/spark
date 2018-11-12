@@ -1,0 +1,32 @@
+package org.guoqing.sparkjava.controller;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * Count Tester.
+ *
+ * @author DGQ
+ * @version 1.0
+ * @since <pre>十一月 6, 2018</pre>
+ */
+
+public class CountTest {
+    @Before
+    public void setUp() throws Exception {
+        System.out.println("this is before...");
+    }
+
+
+    /**
+     * Method: wordCount(String inputFile, String outputFile)
+     */
+    @Test
+    public void testWordCount() throws Exception {
+        String inputFile = "inputFile.txt";
+        String outputFile = "outputFile.txt";
+        Count.wordCount(inputFile, outputFile);
+    }
+
+
+}
