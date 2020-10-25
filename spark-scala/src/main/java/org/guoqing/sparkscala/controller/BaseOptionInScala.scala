@@ -9,7 +9,7 @@ import org.guoqing.sparkscala.config.InitSpark
   * @since 2018-11-06
   */
 class BaseOptionInScala {
-  val sc = InitSpark.sparkConf();
+  val sc = InitSpark.getSparkConf();
 
 
   /**
@@ -26,7 +26,7 @@ class BaseOptionInScala {
 }
 
 object BaseOptionInScalaT extends App {
-  val sc = InitSpark.sparkConf()
+  val sc = InitSpark.getSparkConf()
   val input = sc.parallelize(List(1, 2, 3, 4))
   val result = input.aggregate((0, 0))((acc, value) => (acc._1 + value, acc._2 + 1), (acc1,
                                                                                       acc2) => (acc1._1 + acc2._1, acc1._2 + acc2._2))
@@ -35,14 +35,14 @@ object BaseOptionInScalaT extends App {
 }
 
 object FlatMapTest extends App {
-  val sc = InitSpark.sparkConf()
+  val sc = InitSpark.getSparkConf()
   val input = sc.parallelize(List("Hello World", "Hi"))
   val result = input.flatMap(line => line.split(" "))
   assert(result.first().equals("Hello"), "测试数据不相等")
 }
 
 object Test extends App {
-  val sc = InitSpark.sparkConf()
+  val sc = InitSpark.getSparkConf()
   val input = sc.parallelize(List(1, 2, 3, 3))
   println("RDD中返回前面的两个元素" + input.top(2).foreach(println))
   println("RDD中元素的个数" + input.count())

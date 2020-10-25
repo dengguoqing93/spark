@@ -9,7 +9,7 @@ import org.guoqing.sparkscala.config.InitSpark
   * @since 2018-11-09
   */
 class ReadAndWriteTxt {
-  val sc = InitSpark.sparkConf()
+  val sc = InitSpark.getSparkConf()
 
   def calMean() = {
     val input = sc.wholeTextFiles("file:///Users/dengguoqing/sparkData")

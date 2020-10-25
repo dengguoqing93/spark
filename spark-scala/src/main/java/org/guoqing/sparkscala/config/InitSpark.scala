@@ -1,5 +1,6 @@
 package org.guoqing.sparkscala.config
 
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -14,12 +15,33 @@ class InitSpark(val master: String = "local", val appName: String = "My App") {
     val sc = new SparkContext(conf)
     sc
   }
+
+
+  def SparkSessionBuilt(): SparkSession = {
+    val sparkSession = SparkSession.builder().appName("test").master("local")
+      .config("configuration_key", "configuration_value")
+      .enableHiveSupport().getOrCreate()
+    sparkSession
+  }
+
+  def sparkSessionInit(appName: String = "default", master: String = "local"): SparkSession = {
+    val sparkSession = SparkSession.builder().appName(appName).master(master)
+      .config("configuration_key", "configuration_value")
+      .enableHiveSupport().getOrCreate()
+    sparkSession
+  }
 }
 
 object InitSpark {
-  val spark = new InitSpark
+  val initSpark = new InitSpark
 
-  def sparkConf() = {
-    spark.sparkConf()
+  def getSparkConf() = {
+    initSpark.sparkConf()
   }
+
+  def defaultSparkSession(appName: String = "default", master: String = "local"): SparkSession = {
+    initSpark.sparkSessionInit(appName, master)
+  }
+
+
 }
